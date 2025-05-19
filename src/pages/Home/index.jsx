@@ -3,31 +3,35 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const [countries, setCountries] = useState([]);
+  const [breeds, setBreeds] = useState([]);
 
   useEffect(() => {
-    axios.get('https://restcountries.com/v3.1/all')
+    axios.get('https://dog.ceo/api/breeds/list/all')
       .then(response => {
-        setCountries(response.data);
+        // response.data.message é um objeto com as raças como chaves
+        setBreeds(Object.keys(response.data.message));
       })
       .catch(error => console.log(error));
   }, []);
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold text-center mb-8">Lista de Países</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {countries.map(country => (
-          <div key={country.cca3} className="bg-white shadow-lg rounded-lg p-4 text-center">
-            <Link to={`/detalhes/${country.cca3}`}>
-              <img
-                src={country.flags.png}
-                alt={country.name.common}
-                className="w-full h-32 object-contain mb-4 mx-auto"
-              />
-              <h2 className="text-xl font-semibold">{country.name.common}</h2>
-            </Link>
-          </div>
+      <h1
+        className="text-3xl font-bold text-center mb-8"
+        style={{ color: '#b87de8' }}
+      >
+        Raças de Cachorro
+      </h1>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+        {breeds.map(breed => (
+          <Link
+            key={breed}
+            to={`/detalhes/${breed}`}
+            className="bg-white shadow rounded p-4 text-center hover:bg-pink-100 transition"
+          >
+            <h2 className="capitalize text-lg font-semibold">{breed}</h2>
+          </Link>
         ))}
       </div>
     </div>
