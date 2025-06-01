@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './index.css';  // Importação do CSS global
-import './App.css';    // Importação do CSS específico do App
+import { BrowserRouter } from 'react-router-dom';
+import { FavoritesProvider } from './context/FavoritesContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <FavoritesProvider>
+        <App />
+      </FavoritesProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
