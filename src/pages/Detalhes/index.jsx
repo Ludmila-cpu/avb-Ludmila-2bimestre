@@ -38,7 +38,7 @@ const Detalhes = () => {
     );
   };
 
-  if (images.length === 0) return <p className="text-center mt-10">Carregando imagens...</p>;
+  if (images.length === 0) return <p className="text-center mt-18">Carregando imagens...</p>;
 
   return (
     <div className="container mx-auto p-4 text-center mt-12">
@@ -56,7 +56,7 @@ const Detalhes = () => {
 
         {/* Imagem */}
         {imgLoading && (
-        <div className="container mx-auto pt-18 px-2 text-center">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-500 text-lg">
             Carregando...
           </div>
         )}
